@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report Card Generator</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ABE2, #5563DE);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input, button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        button {
+            background: #5563DE;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #3746b0;
+        }
+        .subject-row {
+            display: flex;
+            gap: 5px;
+        }
+        .subject-row input {
+            flex: 1;
+        }
+    </style>
+
+    <script>
+        function createSubjectFields() {
+            const container = document.getElementById('subjects-container');
+            container.innerHTML = '';
+
+            const numSubjects = parseInt(document.getElementById('num_subjects').value);
+            for (let i = 0; i < numSubjects; i++) {
+                const div = document.createElement('div');
+                div.classList.add('subject-row');
+
+                div.innerHTML = `
+                    <input type="text" name="subject_${i}" placeholder="Subject ${i+1}" required>
+                    <input type="number" name="full_${i}" placeholder="Full Marks" required>
+                    <input type="number" name="obtained_${i}" placeholder="Marks Obtained" required>
+                `;
+                container.appendChild(div);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="form-card">
+        <h2>🎓 Report Card Generator</h2>
+        <form action="/generate" method="post">
+            <input type="text" name="student_name" placeholder="Student Name" required>
+            <input type="number" id="num_subjects" name="num_subjects" placeholder="How many subjects?" required oninput="createSubjectFields()">
+            <div id="subjects-container"></div>
+            <button type="submit">Generate Report</button>
+        </form>
+    </div>
+</body>
+</html>

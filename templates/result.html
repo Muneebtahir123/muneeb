@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report Card</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            width: 450px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #5563DE;
+            color: white;
+        }
+        .summary {
+            font-weight: bold;
+        }
+        .progress {
+      background: #eee;
+      border-radius: 10px;
+      height: 20px;
+      overflow: hidden;
+  }
+  .progress-bar {
+      height: 100%;
+      background: #5563DE;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Report Card for {{ student_name }}</h2>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Full Marks</th>
+                <th>Obtained</th>
+            </tr>
+            {% for subject, full, obtained in subjects %}
+            <tr>
+                <td>{{ subject }}</td>
+                <td>{{ full }}</td>
+                <td>{{ obtained }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="summary">
+                <td>Total</td>
+                <td>{{ total_full }}</td>
+                <td>{{ total_obtained }}</td>
+            </tr>
+        </table>
+
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+        <p><b>Percentage:</b> {{ percentage }}%</p>
+    </div>
+</body>
+</html>
